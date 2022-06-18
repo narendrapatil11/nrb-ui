@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { bool, element, oneOf, oneOfType, string } from 'prop-types';
+import { bool, element, number, oneOf, oneOfType, string } from 'prop-types';
 import classNames from "classnames";
 import { BADGE_VARIANTS } from "./Badge.constant";
 import { omit } from "../../utils/lodashFunctions";
@@ -19,7 +19,6 @@ const Badge = props => {
       'p-2': topPlacement && !content && !children
     })
   useLayoutEffect(() => {
-    console.log(Object.keys(props));
     badgeRef.current.parentElement.classList.add('position-relative');
   }, [ topPlacement ])
 
@@ -51,7 +50,7 @@ Badge.propTypes = {
   /**
    * Badge content
    */
-  content: oneOfType([ string, element ]).isRequired,
+  content: oneOfType([ string, number, element ]).isRequired,
   /**
    * Rounded Badge
    */
@@ -60,6 +59,12 @@ Badge.propTypes = {
    * Badge position to top-right
    */
   topPlacement: bool,
-};
+}
+
+Badge.defaultProps = {
+  variant: 'primary',
+  rounded: false,
+  topPlacement: false
+}
 
 export default Badge;
