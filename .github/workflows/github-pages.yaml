@@ -1,0 +1,30 @@
+name: Github Pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  github-pages-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+
+      - name: Build static storybook
+        run: |
+          install
+          ./node_modules/.bin/build-storybook
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: gh-pages
+          folder: storybook-static
