@@ -4,13 +4,22 @@ import classNames from "classnames";
 import { omit } from "../../utils/lodashFunctions";
 import './Button.scss'
 
+/**
+ *
+ * Button component styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
+ *
+ * This component supports rest props; any additional props on button will be
+ * passed through to the root node of `Button`.
+ */
 const Button = props => {
-  const { children, variant, size, className, label, title } = props;
+  const { children, variant, size, className, label, title, disabled, outline } = props;
+  const generalClass = outline ? 'btn-outline-' : 'btn-';
   return (
     <button
       type="button"
-      className={ classNames('nrb-btn btn', `btn-${ variant }`, `btn-${ size }`, className) }
+      className={ classNames('nrb-btn btn', `${ generalClass }${ variant }`, `btn-${ size }`, className) }
       title={ title }
+      disabled={ disabled }
       { ...omit(props, [ ...Object.keys(props), 'children' ]) }
     >
       { label || children }
@@ -20,7 +29,7 @@ const Button = props => {
 
 Button.propTypes = {
   /**
-   * Type of Button
+   * Style of button to render
    */
   variant: oneOf([ 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'link', ]),
   /**
@@ -32,7 +41,7 @@ Button.propTypes = {
    */
   size: oneOf([ undefined, 'sm', 'lg' ]),
   /**
-   * Button contents
+   * Renders the button label
    */
   label: string,
   /**
@@ -40,13 +49,21 @@ Button.propTypes = {
    */
   title: string,
   /**
-   * Button disabled
+   * disables the button when set to `true`
    */
   disabled: bool,
   /**
-   * Optional click handler
+   * Outline the button when set to `true`
+   */
+  outline: bool,
+  /**
+   * Click callback, with event object passed as argument
    */
   onClick: func,
+  /**
+   * Optional value for `data-testid` attribute
+   */
+  testId: string,
 };
 
 Button.defaultProps = {
@@ -54,6 +71,7 @@ Button.defaultProps = {
   size: undefined,
   onClick: undefined,
   disabled: false,
+  outline: false,
 };
 
 export default Button;

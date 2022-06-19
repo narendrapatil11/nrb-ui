@@ -1,0 +1,1 @@
+export const BADGE_VARIANTS = [ 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', ]

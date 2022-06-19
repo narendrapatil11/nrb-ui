@@ -1,15 +1,16 @@
 import React from 'react';
 import { Badge, Button } from "../lib";
+import { BADGE_VARIANTS } from "./metaData";
 
 export default {
-  title: 'Example/Badges',
+  title: 'Components/Badges',
   component: Badge,
   argTypes: {},
   parameters: {
     layout: 'centered',
   },
 };
-const BADGE_VARIANTS = [ 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', ]
+
 
 const VariantsTemplate = (args) => {
   return BADGE_VARIANTS.map((variant) => (
