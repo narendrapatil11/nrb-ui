@@ -21,7 +21,7 @@ jobs:
 
       - name: Build static storybook
         run: |
-          install
+          yarn install
           ./node_modules/.bin/build-storybook
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.7
